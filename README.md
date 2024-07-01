@@ -12,11 +12,12 @@ Q2: State for continuing valid characters (letters or digits)
 Q3: State for digits after the first character (letter)
 Q4: State for underscores after a letter or digit
 Q5: Trap state (invalid state)
-##  Transition Table
-Current State	Letter (0)	Digit (1)	Underscore (2)	Other (3)
-Q0	Q1	Q5	Q5	Q5
-Q1	Q1	Q2	Q4	Q5
-Q2	Q2	Q2	Q4	Q5
-Q3	Q2	Q2	Q4	Q5
-Q4	Q4	Q4	Q4	Q5
-Q5	Q5	Q5	Q5	Q5
+| Current State | Letter (0) | Digit (1) | Underscore (2) | Other (3) |
+|---------------|------------|-----------|----------------|-----------|
+| Q0            | Q1         | Q5        | Q5             | Q5        |
+| Q1            | Q1         | Q2        | Q4             | Q5        |
+| Q2            | Q2         | Q2        | Q4             | Q5        |
+| Q3            | Q2         | Q2        | Q4             | Q5        |
+| Q4            | Q4         | Q4        | Q4             | Q5        |
+| Q5            | Q5         | Q5        | Q5             | Q5        |
+
