@@ -1,0 +1,56 @@
+public class Compil {
+
+    private static final int NUM_STATES = 6;
+    private static final int NUM_CHARACTERS = 128; // ASCII ilkel 
+
+    private static final int Q0 = 0;
+    private static final int Q1 = 1;
+    private static final int Q2 = 2;
+    private static final int Q3 = 3;
+    private static final int Q4 = 4;
+    private static final int Q5 = 5;
+
+    private static final int[][] transitionMatrix = {
+        // Columns: [letter, digit, underscore, other]
+          {Q1, Q3, Q5, Q5}, // Q0
+             {Q1, Q2, Q4, Q5}, // Q1
+        {Q2, Q2, Q4, Q5},   // Q2
+        {Q2, Q2, Q4, Q5}, // Q3
+        {Q4, Q4, Q4, Q5}, // Q4
+        {Q5, Q5, Q5, Q5}  // Q5  final)
+    };
+
+    public static boolean isIdentifier(String input) {
+        int currentState = Q0;
+         // anebdu s Q0
+               for (char c : input.toCharArray()) {
+            int charType = getCharType(c);
+            currentState = transitionMatrix[currentState][charType];
+
+            if (currentState == Q5) {
+                return false; // no can 
+            }
+        }
+
+        return currentState == Q1 || currentState == Q2 || currentState == Q4;
+    }
+
+    private static int getCharType(char c) {
+        if (Character.isLetter(c)) {
+            return 0; // letter
+        } else if (Character.isDigit(c)) {
+            return 1; // digit
+        } else if (c == '_') {
+            return 2; // underscore
+        } else {
+            return 3; // other
+        }
+    }
+
+    public static void main(String[] args) {
+        // mithaal 
+        System.out.println(isIdentifier("var_1"));  // true
+        
+        System.out.println(isIdentifier("_abc"));    // false
+    }
+}
